@@ -17,23 +17,36 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".10"
-            android:text="TextView" />
+            android:gravity="center"
+            android:text="Puntuacion: 0"
+            android:textSize="30sp" />
 
         <GridView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".80"
+            android:layout_weight=".70"
             android:columnWidth="150dp"
             android:numColumns="auto_fit">
 
         </GridView>
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".10"
+            android:gravity="center"
+            android:text="Restan 10 segundos" />
+
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
+            android:layout_weight=".10"
+            android:background="#3F51B5"
+            android:textColor="#fff"
             android:text="Omitir" />
 
     </LinearLayout>
