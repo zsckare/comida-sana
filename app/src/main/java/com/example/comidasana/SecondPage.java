@@ -21,6 +21,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.emredavarci.noty.Noty;
 
+import java.util.LinkedList;
+
 public class SecondPage extends AppCompatActivity {
      GridView gridView;
      CustomAdapter adaptador;
@@ -30,7 +32,7 @@ public class SecondPage extends AppCompatActivity {
     boolean loser = false;
     Button btnOmitir;
     MediaPlayer ambiente,gameover;
-
+    int dificultad = 2;
     TextView mTextField;
 
     CountDownTimer countDownTimer;
@@ -55,7 +57,7 @@ public class SecondPage extends AppCompatActivity {
                         loser=true;
                         btnOmitir.setText("Reiniciar juego");
                         showLostGame();
-
+                        dificultad = 2;
                     }else{
                         YoYo.with(Techniques.BounceIn)
                                 .duration(1000)
@@ -66,6 +68,9 @@ public class SecondPage extends AppCompatActivity {
                         tvPuntuacion.setText("Puntuacion: "+puntuacion);
                         Log.d("DEB", "onItemClick: "+puntuacion);
                         countDownTimer.start();
+                        if(dificultad<6){
+                            dificultad = dificultad + 2;
+                        }
                         if(puntuacion ==20){
                             ambiente.stop();
 
@@ -97,7 +102,7 @@ public class SecondPage extends AppCompatActivity {
                                 .duration(1000)
                                 .repeat(0)
                                 .playOn(findViewById(R.id.gridview));
-                        Noty.init(SecondPage.this, "Perdiste \n Si habia una cpmida saludable en las imagenes", rl,
+                        Noty.init(SecondPage.this, "Perdiste \n Si habia una comida saludable en las imagenes", rl,
                                 Noty.WarningStyle.ACTION)
                                 .setActionText("OK")
                                 .setHeight(new RelativeLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT))
@@ -109,6 +114,9 @@ public class SecondPage extends AppCompatActivity {
                                 .show();
                         tvPuntuacion.setText("Puntuacion: 0");
                         puntuacion = 0;
+                        dificultad = 2;
+                        btnOmitir.setText("Reiniciar");
+                        loser=true;
                     }
                 }else{
                     loser = false;
@@ -124,7 +132,7 @@ public class SecondPage extends AppCompatActivity {
         gameover = MediaPlayer.create(SecondPage.this,R.raw.gameover);
         ambiente.setLooping(true);
         ambiente.start();
-        countDownTimer = new CountDownTimer(7000, 1000) {
+        countDownTimer = new CountDownTimer(6000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 long resta = millisUntilFinished / 1000;
@@ -155,6 +163,9 @@ public class SecondPage extends AppCompatActivity {
                             .show();
                     tvPuntuacion.setText("Puntuacion: 0");
                     puntuacion = 0;
+                    dificultad = 2;
+                    btnOmitir.setText("Reiniciar");
+                    loser = true;
 
                 }
             }
@@ -163,15 +174,21 @@ public class SecondPage extends AppCompatActivity {
         countDownTimer.start();
     }
     public void setItems(){
+        boolean yaHayUnaSaludable = false;
         if(!Comun.selectedFoodList.isEmpty()){
             Comun.selectedFoodList.clear();
         }
-        for (int i = 0; i < 4; i++) {
+        FoodModel foodModel = getComidaSana();
+        Comun.selectedFoodList.add(foodModel);
+        for (int i = 0; i < (dificultad -1); i++) {
+            int r = (int) (Math.random() * (9 - 1)) + 1;
 
-            int r = (int) (Math.random() * (17 - 1)) + 1;
-            Comun.selectedFoodList.add(Comun.foodList.get(r));
+            FoodModel comida = Comun.foodList.get(r);
+            Comun.selectedFoodList.add(comida);
+
         }
         if (checkComidaSaludable(Comun.selectedFoodList)) {
+
             adaptador.notifyDataSetChanged();
         }else{
             setItems();
@@ -188,6 +205,24 @@ public class SecondPage extends AppCompatActivity {
         }
 
         return siHay;
+
+    }
+
+    FoodModel getComidaSana(){
+        int r = (int) (Math.random() * (9 - 1)) + 1;
+        FoodModel comida = Comun.foodListSaludable.get(r);
+
+        return comida;
+    }
+    boolean checkComidaSana(LinkedList<FoodModel>alimentos){
+        boolean sihay = false;
+        for (int i = 0; i < alimentos.size(); i++) {
+            int tipo = alimentos.get(i).getTipo();
+            if (tipo==2){
+                sihay = true;
+            }
+        }
+        return  sihay;
     }
     void showLostGame(){
         countDownTimer.cancel();

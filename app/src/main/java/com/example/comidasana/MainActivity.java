@@ -52,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
         Comun.foodList.add(comida7);
         Comun.foodList.add(comida8);
         Comun.foodList.add(comida9);
-        Comun.foodList.add(comida10);
-        Comun.foodList.add(comida11);
-        Comun.foodList.add(comida12);
-        Comun.foodList.add(comida13);
-        Comun.foodList.add(comida14);
-        Comun.foodList.add(comida15);
-        Comun.foodList.add(comida16);
-        Comun.foodList.add(comida17);
-        Comun.foodList.add(comida18);
+        Comun.foodListSaludable.add(comida10);
+        Comun.foodListSaludable.add(comida11);
+        Comun.foodListSaludable.add(comida12);
+        Comun.foodListSaludable.add(comida13);
+        Comun.foodListSaludable.add(comida14);
+        Comun.foodListSaludable.add(comida15);
+        Comun.foodListSaludable.add(comida16);
+        Comun.foodListSaludable.add(comida17);
+        Comun.foodListSaludable.add(comida18);
 
     }
 }
