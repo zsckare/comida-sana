@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import java.util.LinkedList;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -170,8 +171,23 @@ public class SecondPage extends AppCompatActivity {
             int r = (int) (Math.random() * (17 - 1)) + 1;
             Comun.selectedFoodList.add(Comun.foodList.get(r));
         }
-        adaptador.notifyDataSetChanged();
+        if (checkComidaSaludable(Comun.selectedFoodList)) {
+            adaptador.notifyDataSetChanged();
+        }else{
+            setItems();
+        }
         Log.d("DEB","Toal="+Comun.selectedFoodList.toString());
+    }
+
+    boolean checkComidaSaludable(LinkedList<FoodModel> alimentos){
+        boolean siHay = false;
+        for (int i = 0; i < alimentos.size(); i++) {
+            if(alimentos.get(i).getTipo()==2){
+                siHay = true;
+            }
+        }
+
+        return siHay;
     }
     void showLostGame(){
         countDownTimer.cancel();
