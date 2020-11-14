@@ -3,6 +3,7 @@ package com.example.comidasana;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,8 @@ public class WinnerActivity extends AppCompatActivity {
             }
         });
 
+        MediaPlayer win = MediaPlayer.create(WinnerActivity.this,R.raw.win);
+        win.start();
         YoYo.with(Techniques.BounceIn)
                 .duration(1000)
                 .repeat(0)

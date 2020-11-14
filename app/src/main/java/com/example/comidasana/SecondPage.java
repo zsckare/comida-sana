@@ -20,6 +20,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.emredavarci.noty.Noty;
 
+import java.util.LinkedList;
+
 public class SecondPage extends AppCompatActivity {
      GridView gridView;
      CustomAdapter adaptador;
@@ -170,8 +172,24 @@ public class SecondPage extends AppCompatActivity {
             int r = (int) (Math.random() * (17 - 1)) + 1;
             Comun.selectedFoodList.add(Comun.foodList.get(r));
         }
-        adaptador.notifyDataSetChanged();
+        if (checkComidaSana(Comun.selectedFoodList)){
+            adaptador.notifyDataSetChanged();
+        }else{
+            setItems();
+        }
+
         Log.d("DEB","Toal="+Comun.selectedFoodList.toString());
+    }
+
+    boolean checkComidaSana(LinkedList<FoodModel>alimentos){
+        boolean sihay = false;
+        for (int i = 0; i < alimentos.size(); i++) {
+            int tipo = alimentos.get(i).getTipo();
+            if (tipo==2){
+                sihay = true;
+            }
+        }
+        return  sihay;
     }
     void showLostGame(){
         countDownTimer.cancel();
