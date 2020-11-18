@@ -4,6 +4,10 @@ public class FoodModel {
     String name,imagen;
     int tipo;
 
+    public FoodModel() {
+
+    }
+
     public FoodModel(String name, String imagen, int tipo) {
         this.name = name;
         this.imagen = imagen;
