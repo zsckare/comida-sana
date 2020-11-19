@@ -42,6 +42,14 @@ public class FirstPage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),VideoActivity.class));
             }
         });
+
+        Button btnMemo = (Button)findViewById(R.id.btnSegundoReto);
+        btnMemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MemoramaPage.class));
+            }
+        });
         new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
