@@ -6,5 +6,7 @@ public class Comun {
     public static LinkedList<FoodModel>foodList = new LinkedList();
     public static LinkedList<FoodModel>foodListSaludable = new LinkedList();
     public static LinkedList<FoodModel>selectedFoodList = new LinkedList();
+    public static LinkedList<CardModel>cardList = new LinkedList();
+
 
 }
