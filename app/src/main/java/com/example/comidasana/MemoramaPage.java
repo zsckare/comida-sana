@@ -2,15 +2,21 @@ package com.example.comidasana;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.emredavarci.noty.Noty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,8 +28,13 @@ public class MemoramaPage extends AppCompatActivity {
     LinkedList<Integer>lastPosition = new LinkedList();
     GridView gridMemorama;
     AdapterMemorama adapterMemorama;
+    RelativeLayout rl;
+    MediaPlayer ambiente,gameover;
+    int dificultad = 2;
 
+    CountDownTimer countDownTimer;
     ArrayList<Integer>movimientoAnterior = new ArrayList();
+    TextView mTextField;
 
     /* CardModel
         Flipped == 2 -> Esta b oca abajo
@@ -33,11 +44,11 @@ public class MemoramaPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memorama_page);
-
+        mTextField = (TextView)findViewById(R.id.textView7);
+        rl = (RelativeLayout) findViewById(R.id.myLayout2);
         gridMemorama = (GridView)findViewById(R.id.gridMemorama);
         adapterMemorama = new AdapterMemorama(this);
         gridMemorama.setAdapter(adapterMemorama);
-
         gridMemorama.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,6 +90,41 @@ public class MemoramaPage extends AppCompatActivity {
         });
 
         fillList();
+        ambiente = MediaPlayer.create(MemoramaPage.this,R.raw.tetris);
+        gameover = MediaPlayer.create(MemoramaPage.this,R.raw.gameover);
+        ambiente.setLooping(true);
+        ambiente.start();
+        countDownTimer = new CountDownTimer(60000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long resta = millisUntilFinished / 1000;
+                mTextField.setText("Tiempo Restante:  "+resta + " segundos");
+            }
+
+            public void onFinish() {
+
+                mTextField.setText("Se ha acabo el tiempo");
+                countDownTimer.cancel();
+                ambiente.pause();
+                gameover.start();
+
+                YoYo.with(Techniques.Shake)
+                        .duration(1000)
+                        .repeat(0)
+                        .playOn(findViewById(R.id.gridview));
+                Noty.init(MemoramaPage.this, "Perdiste \n Se acabo el tiempo.", rl,
+                        Noty.WarningStyle.ACTION)
+                        .setActionText("OK")
+                        .setHeight(new RelativeLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT))
+                        .setWarningBoxBgColor("#00b8e6")
+                        .setWarningTappedColor("#00ccff")
+                        .setWarningBoxMargins(40,0,40,0)
+                        .setWarningBoxPosition(Noty.WarningPos.CENTER)
+                        .setAnimation(Noty.RevealAnim.FADE_IN, Noty.DismissAnim.FADE_OUT, 400,400);
+            }
+
+        };
+        countDownTimer.start();
     }
 
     private void restartPreviusMove() {
@@ -90,7 +136,9 @@ public class MemoramaPage extends AppCompatActivity {
     }
 
     public void fillList(){
-
+        if(!Comun.cardList.isEmpty()){
+            Comun.cardList.clear();
+        }
         CardModel comida0= new CardModel("NARANJA", "https://i0.wp.com/historiasdelahistoria.com/wordpress-2.3.1-ES-0.1-FULL/wp-content/uploads/2015/11/naranja.jpg?fit=607%2C335&ssl=1",2);
         CardModel comida1 = new CardModel("PLATANO", "https://innatia.info/images/galeria/platano-2.jpg",2);
         CardModel comida2 = new CardModel("TOMATE", "https://as.com/buenavida/imagenes/2017/04/14/portada/1492167267_473599_1492167754_noticia_normal.jpg",2);
