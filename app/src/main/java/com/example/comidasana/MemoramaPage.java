@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class MemoramaPage extends AppCompatActivity {
@@ -40,6 +44,7 @@ public class MemoramaPage extends AppCompatActivity {
                 //primero verificar que  no este volteada
                 final CardModel card = Comun.cardList.get(position);
                 if(card.getFlipped()==2){
+
                     if(movimientoAnterior.isEmpty()){
                         movimientoAnterior.add(position);
                         card.setFlipped(1);
@@ -59,7 +64,9 @@ public class MemoramaPage extends AppCompatActivity {
                                         Comun.cardList.get(movimientoAnterior.get(0)).setFlipped(2);
                                         adapterMemorama.notifyDataSetChanged();
                                     }
-                                }, 3000);
+                                }, 1000);
+                            }else{
+                                movimientoAnterior.clear();
                             }
                         }else{
                             restartPreviusMove();
@@ -83,15 +90,35 @@ public class MemoramaPage extends AppCompatActivity {
     }
 
     public void fillList(){
+
+        CardModel comida0= new CardModel("NARANJA", "https://i0.wp.com/historiasdelahistoria.com/wordpress-2.3.1-ES-0.1-FULL/wp-content/uploads/2015/11/naranja.jpg?fit=607%2C335&ssl=1",2);
+        CardModel comida1 = new CardModel("PLATANO", "https://innatia.info/images/galeria/platano-2.jpg",2);
+        CardModel comida2 = new CardModel("TOMATE", "https://as.com/buenavida/imagenes/2017/04/14/portada/1492167267_473599_1492167754_noticia_normal.jpg",2);
+        CardModel comida3 = new CardModel("ZANAHORIA", "https://frutasyverduras.info/wp-content/uploads/2018/08/zanahoria-1280x720.jpg",2);
+        CardModel comida4 = new CardModel("KIWI", "https://gourmetdemexico.com.mx/wp-content/uploads/2020/05/diseno-sin-titulo-70.jpg",2);
+        CardModel comida5 = new CardModel("GUAYABA", "https://www.tn8.tv/media/cache/85/a5/85a5c022dc7d09861ad4c338096f8a18.jpg",2);
+        CardModel comida6 = new CardModel("MANZANA", "https://dalissanavarro.files.wordpress.com/2019/02/manzana.gif?w=400",2);
+        CardModel comida7 = new CardModel("limon", "https://i1.wp.com/noticieros.televisa.com/wp-content/uploads/2020/08/beneficios-de-tomar-cucharada-de-jugo-de-limon-en-ayunas.jpg?w=1093&ssl=1",2);
+        CardModel comida8 = new CardModel("sandia", "https://mk0lanoticiavesdar5g.kinstacdn.com/wp-content/uploads/2020/08/5-razones-para-comer-sandia-todos-los-dias.jpg.webp",2);
         CardModel comida10= new CardModel("NARANJA", "https://i0.wp.com/historiasdelahistoria.com/wordpress-2.3.1-ES-0.1-FULL/wp-content/uploads/2015/11/naranja.jpg?fit=607%2C335&ssl=1",2);
         CardModel comida11 = new CardModel("PLATANO", "https://innatia.info/images/galeria/platano-2.jpg",2);
         CardModel comida12 = new CardModel("TOMATE", "https://as.com/buenavida/imagenes/2017/04/14/portada/1492167267_473599_1492167754_noticia_normal.jpg",2);
         CardModel comida13 = new CardModel("ZANAHORIA", "https://frutasyverduras.info/wp-content/uploads/2018/08/zanahoria-1280x720.jpg",2);
         CardModel comida14 = new CardModel("KIWI", "https://gourmetdemexico.com.mx/wp-content/uploads/2020/05/diseno-sin-titulo-70.jpg",2);
-        CardModel comida15 = new CardModel("NUECES", "https://www.lavanguardia.com/files/og_thumbnail/uploads/2019/08/07/5e998395e126a.jpeg",2);
-        CardModel comida16 = new CardModel("SEMILLAS DE GIRASOL", "https://www.lavanguardia.com/files/article_main_microformat/uploads/2020/03/16/5e9964ba3ea4a.jpeg",2);
-        CardModel comida17 = new CardModel("PESCADO", "https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/article/5dbffb145cafe8973e525d5d/pescado.jpg",2);
-        CardModel comida18 = new CardModel("PASTA", "https://cdn.kiwilimon.com/recetaimagen/29848/31748.jpg",2);
+        CardModel comida15 = new CardModel("GUAYABA", "https://www.tn8.tv/media/cache/85/a5/85a5c022dc7d09861ad4c338096f8a18.jpg",2);
+        CardModel comida16 = new CardModel("MANZANA", "https://dalissanavarro.files.wordpress.com/2019/02/manzana.gif?w=400",2);
+        CardModel comida17 = new CardModel("limon", "https://i1.wp.com/noticieros.televisa.com/wp-content/uploads/2020/08/beneficios-de-tomar-cucharada-de-jugo-de-limon-en-ayunas.jpg?w=1093&ssl=1",2);
+        CardModel comida18 = new CardModel("sandia", "https://mk0lanoticiavesdar5g.kinstacdn.com/wp-content/uploads/2020/08/5-razones-para-comer-sandia-todos-los-dias.jpg.webp",2);
+
+        Comun.cardList.add(comida1);
+        Comun.cardList.add(comida2);
+        Comun.cardList.add(comida3);
+        Comun.cardList.add(comida0);
+        Comun.cardList.add(comida4);
+        Comun.cardList.add(comida5);
+        Comun.cardList.add(comida6);
+        Comun.cardList.add(comida7);
+        Comun.cardList.add(comida8);
 
         Comun.cardList.add(comida10);
         Comun.cardList.add(comida11);
@@ -103,6 +130,8 @@ public class MemoramaPage extends AppCompatActivity {
         Comun.cardList.add(comida17);
         Comun.cardList.add(comida18);
         Log.d(TAG, "fillList: ");
+        Collections.shuffle(Comun.cardList);
+
         adapterMemorama.notifyDataSetChanged();
         Log.d(TAG, "fillList: "+Comun.cardList.toString());
     }

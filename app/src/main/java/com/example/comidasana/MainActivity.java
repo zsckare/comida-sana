@@ -33,15 +33,17 @@ public class MainActivity extends AppCompatActivity {
         FoodModel comida7 = new FoodModel("PALETAS", "https://i.pinimg.com/originals/35/8d/0b/358d0bc424f58996f14962557858a867.jpg",1);
         FoodModel comida8 = new FoodModel("REFRESCO", "https://www.revistamoi.com/wp-content/uploads/2016/04/refresco-mar-b.jpg",1);
         FoodModel comida9 = new FoodModel("HOTDOG", "https://placeralplato.com/files/2015/11/Pan-para-hot-dogs-640x480.jpg?width=1200&enable=upscale",1);
+
         FoodModel comida10= new FoodModel("NARANJA", "https://i0.wp.com/historiasdelahistoria.com/wordpress-2.3.1-ES-0.1-FULL/wp-content/uploads/2015/11/naranja.jpg?fit=607%2C335&ssl=1",2);
         FoodModel comida11 = new FoodModel("PLATANO", "https://innatia.info/images/galeria/platano-2.jpg",2);
         FoodModel comida12 = new FoodModel("TOMATE", "https://as.com/buenavida/imagenes/2017/04/14/portada/1492167267_473599_1492167754_noticia_normal.jpg",2);
         FoodModel comida13 = new FoodModel("ZANAHORIA", "https://frutasyverduras.info/wp-content/uploads/2018/08/zanahoria-1280x720.jpg",2);
         FoodModel comida14 = new FoodModel("KIWI", "https://gourmetdemexico.com.mx/wp-content/uploads/2020/05/diseno-sin-titulo-70.jpg",2);
-        FoodModel comida15 = new FoodModel("NUECES", "https://www.lavanguardia.com/files/og_thumbnail/uploads/2019/08/07/5e998395e126a.jpeg",2);
-        FoodModel comida16 = new FoodModel("SEMILLAS DE GIRASOL", "https://www.lavanguardia.com/files/article_main_microformat/uploads/2020/03/16/5e9964ba3ea4a.jpeg",2);
-        FoodModel comida17 = new FoodModel("PESCADO", "https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/article/5dbffb145cafe8973e525d5d/pescado.jpg",2);
-        FoodModel comida18 = new FoodModel("PASTA", "https://cdn.kiwilimon.com/recetaimagen/29848/31748.jpg",2);
+        FoodModel comida15 = new FoodModel("GUAYABA", "https://www.tn8.tv/media/cache/85/a5/85a5c022dc7d09861ad4c338096f8a18.jpg",2);
+        FoodModel comida16 = new FoodModel("MANZANA", "https://dalissanavarro.files.wordpress.com/2019/02/manzana.gif?w=400",2);
+        FoodModel comida17 = new FoodModel("limon", "https://i1.wp.com/noticieros.televisa.com/wp-content/uploads/2020/08/beneficios-de-tomar-cucharada-de-jugo-de-limon-en-ayunas.jpg?w=1093&ssl=1",2);
+        FoodModel comida18 = new FoodModel("sandia", "https://mk0lanoticiavesdar5g.kinstacdn.com/wp-content/uploads/2020/08/5-razones-para-comer-sandia-todos-los-dias.jpg.webp",2);
+
 
         Comun.foodList.add(comida1);
         Comun.foodList.add(comida2);
