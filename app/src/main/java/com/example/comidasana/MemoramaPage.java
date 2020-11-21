@@ -2,6 +2,7 @@ package com.example.comidasana;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,9 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -35,6 +38,7 @@ public class MemoramaPage extends AppCompatActivity {
     CountDownTimer countDownTimer;
     ArrayList<Integer>movimientoAnterior = new ArrayList();
     TextView mTextField;
+
 
     /* CardModel
         Flipped == 2 -> Esta b oca abajo
@@ -67,6 +71,7 @@ public class MemoramaPage extends AppCompatActivity {
                             card.setFlipped(1);
                             adapterMemorama.notifyDataSetChanged();
                             if(card.getName().compareToIgnoreCase(Comun.cardList.get(movimientoAnterior.get(0)).getName())!=0){
+
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     public void run() {
@@ -74,10 +79,19 @@ public class MemoramaPage extends AppCompatActivity {
                                         card.setFlipped(2);
                                         Comun.cardList.get(movimientoAnterior.get(0)).setFlipped(2);
                                         adapterMemorama.notifyDataSetChanged();
+
                                     }
                                 }, 1000);
+
+
                             }else{
-                                movimientoAnterior.clear();
+                                if(checkFin()){
+                                    countDownTimer.cancel();
+                                    ambiente.stop();
+                                    startActivity(new Intent(getApplicationContext(), WinnerActivity.class));
+                                }
+                                if(!movimientoAnterior.isEmpty())
+                                    movimientoAnterior.clear();
                             }
                         }else{
                             restartPreviusMove();
@@ -94,7 +108,7 @@ public class MemoramaPage extends AppCompatActivity {
         gameover = MediaPlayer.create(MemoramaPage.this,R.raw.gameover);
         ambiente.setLooping(true);
         ambiente.start();
-        countDownTimer = new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 long resta = millisUntilFinished / 1000;
@@ -125,6 +139,15 @@ public class MemoramaPage extends AppCompatActivity {
 
         };
         countDownTimer.start();
+
+        Button btn = (Button)findViewById(R.id.button6);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fillList();
+                countDownTimer.start();
+            }
+        });
     }
 
     private void restartPreviusMove() {
@@ -184,6 +207,20 @@ public class MemoramaPage extends AppCompatActivity {
         Log.d(TAG, "fillList: "+Comun.cardList.toString());
     }
 
+    boolean checkFin(){
+        boolean fin = false;
+        int flipped = 0;
+        for (int i = 0; i < Comun.cardList.size(); i++) {
+            if(Comun.cardList.get(i).getFlipped()==1){
+                flipped++;
+            }
+            if(flipped==Comun.cardList.size()){
+                fin = true;
+            }
+        }
+        Toast.makeText(this, ""+flipped+"-"+Comun.cardList.size(), Toast.LENGTH_SHORT).show();
+        return fin;
 
+    }
 
 }

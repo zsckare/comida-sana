@@ -7,6 +7,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+
+import java.util.Collections;
 import java.util.LinkedList;
 import android.view.View;
 import android.view.ViewGroup;
@@ -188,7 +190,7 @@ public class SecondPage extends AppCompatActivity {
 
         }
         if (checkComidaSaludable(Comun.selectedFoodList)) {
-
+            Collections.shuffle(Comun.selectedFoodList);
             adaptador.notifyDataSetChanged();
         }else{
             setItems();

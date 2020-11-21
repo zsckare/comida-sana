@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="#3F51B5"
-                android:text="volver a jugar"
+                android:text="volver a pantalla principal"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
